@@ -3,7 +3,7 @@ var buttons = [];
 var pairs = {};
 
 window.onload = function() {
-	buttons = Array.apply(null, {length: NUM_BUTTONS}).map(function (x, i) { return i + 1 });
+	buttons = Array.apply(null, {length: NUM_BUTTONS}).map(function (x, i) { return (i + 1).toString() });
 	shuffleButtons();
 	setAssociations();
 };
@@ -17,9 +17,9 @@ function shuffleButtons() {
 
 function setAssociations() {
 	for (let i = 0; i < buttons.length - 1; i++) {
-		pairs[buttons[i].toString()] = buttons[i + 1].toString();
+		pairs[buttons[i]] = buttons[i + 1];
 	}
-	pairs[buttons[buttons.length - 1].toString()] = buttons[0].toString();
+	pairs[buttons[buttons.length - 1]] = buttons[0];
 }
 
 function togglePair(tag) {
