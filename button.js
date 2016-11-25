@@ -1,16 +1,12 @@
 const NUM_BUTTONS = 4; 
-var pairs = [];
+var buttons = [];
+var pairs = {};
 
 window.onload = function() {
-	fill(pairs);
-	shuffle(pairs);
+	buttons = Array.apply(null, {length: NUM_BUTTONS}).map(function (x, i) { return i + 1 });
+	shuffle(buttons);
+	setAssociations(pairs);
 };
-
-function fill(arr) {
-	for (let i = 0; i < NUM_BUTTONS; i++) {
-		arr[i] = i + 1;
-	}
-}
 
 function shuffle(arr) {
 	for (let i = arr.length; i > 0; i--) {
@@ -19,29 +15,26 @@ function shuffle(arr) {
 	}
 }
 
-function toggle(tag) {
-	var tagClass = tag.className;
-	var pair = document.getElementById(getPairId(tag.getAttribute("id")));
+function setAssociations(hash) {
+	for (let i = 0; i < buttons.length - 1; i++) {
+		pairs[buttons[i].toString()] = buttons[i + 1].toString();
+	}
+	pairs[buttons[buttons.length - 1].toString()] = buttons[0].toString();
+}
+
+function togglePair(tag) {
+	var pair = document.getElementById(pairs[tag.getAttribute("id")]);
 	if (pair === null) {
 		throw "Pair Error";
 	}
-	if (tagClass == "on") {
-		tag.className = "off";
-		pair.className = "off";
-
-	} else {
-		tag.className = "on";
-		pair.className = "on";
-	}
+	toggle(tag);
+	toggle(pair);
 }
 
-function getPairId(id) {
-	for (let i = 0; i < pairs.length; i+=2) {
-		if (id == pairs[i]) {
-			return pairs[i + 1];
-		} else if (id == pairs[i + 1]) {
-			return pairs[i];
-		}
+function toggle(tag) {
+	if (tag.className == "on") {
+		tag.className = "off";
+	} else {
+		tag.className = "on";
 	}
-	return null;
 }
