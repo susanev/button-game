@@ -4,18 +4,18 @@ var pairs = {};
 
 window.onload = function() {
 	buttons = Array.apply(null, {length: NUM_BUTTONS}).map(function (x, i) { return i + 1 });
-	shuffle(buttons);
-	setAssociations(pairs);
+	shuffleButtons();
+	setAssociations();
 };
 
-function shuffle(arr) {
-	for (let i = arr.length; i > 0; i--) {
+function shuffleButtons() {
+	for (let i = buttons.length; i > 0; i--) {
 		let rand = Math.floor(Math.random() * i);
-		[arr[i - 1], arr[rand]] = [arr[rand], arr[i - 1]];
+		[buttons[i - 1], buttons[rand]] = [buttons[rand], buttons[i - 1]];
 	}
 }
 
-function setAssociations(hash) {
+function setAssociations() {
 	for (let i = 0; i < buttons.length - 1; i++) {
 		pairs[buttons[i].toString()] = buttons[i + 1].toString();
 	}
