@@ -1,0 +1,14 @@
+.buttons div{
+	width: 100px;
+	height: 50px;
+	border: solid 1px #000;
+	margin-top: 10px;
+}
+
+.on {
+	background-color: #ff0000;
+}
+
+.off {
+	background-color: #fff;
+}
